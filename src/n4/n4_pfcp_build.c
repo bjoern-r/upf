@@ -43,9 +43,10 @@ Status UpfN4BuildSessionEstablishmentResponse(Bufblk **bufBlk, uint8_t type,
         /* F-SEID */
         response->uPFSEID.presence = 1;
         response->uPFSEID.value = &fSeid;
+        fSeid.spare=0;
         fSeid.seid = htobe64(session->upfSeid);
         status = PfcpSockaddrToFSeid(Self()->pfcpAddr,
-                                     Self()->pfcpAddr, &fSeid, &len);
+                                     NULL, &fSeid, &len);
         response->uPFSEID.len = len;
 
         /* FQ-CSID */
