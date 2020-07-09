@@ -24,7 +24,7 @@ void UpfDispatcher(const Event *event) {
 
         memset(&header, 0, sizeof(PfcpHeader));
         header.type = PFCP_SESSION_REPORT_REQUEST;
-        header.seid = seid;
+        header.seid = session->smfSeid;
 
         status = UpfN4BuildSessionReportRequestDownlinkDataReport(&bufBlk,
                                                                   header.type,
