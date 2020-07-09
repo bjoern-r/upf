@@ -61,6 +61,8 @@ lib/libgtp5gnl/tools/gtp5g-tunnel
 
 # Build destination
 build
+cmake-build-*/
 
 # Tool,Chain
 TAGS
+.idea/
