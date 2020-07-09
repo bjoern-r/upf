@@ -94,11 +94,11 @@ void UpfDispatcher(const Event *event) {
 
         switch (pfcpMessage->header.type) {
         case PFCP_HEARTBEAT_REQUEST:
-            UTLT_Info("[PFCP] Handle PFCP heartbeat request");
+			UTLT_Debug("[PFCP] Handle PFCP heartbeat request");
             UpfN4HandleHeartbeatRequest(xact, &pfcpMessage->heartbeatRequest);
             break;
         case PFCP_HEARTBEAT_RESPONSE:
-            UTLT_Info("[PFCP] Handle PFCP heartbeat response");
+			UTLT_Debug("[PFCP] Handle PFCP heartbeat response");
             UpfN4HandleHeartbeatResponse(xact, &pfcpMessage->heartbeatResponse);
             break;
         case PFCP_ASSOCIATION_SETUP_REQUEST:

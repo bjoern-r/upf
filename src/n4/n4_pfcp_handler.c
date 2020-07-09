@@ -987,7 +987,7 @@ Status UpfN4HandleHeartbeatRequest(PfcpXact *xact, HeartbeatRequest *request) {
     PfcpHeader header;
     Bufblk *bufBlk = NULL;
 
-    UTLT_Info("[PFCP] Heartbeat Request");
+    UTLT_Debug("[PFCP] Heartbeat Request");
 
     /* Send */
     memset(&header, 0, sizeof(PfcpHeader));
@@ -1006,13 +1006,13 @@ Status UpfN4HandleHeartbeatRequest(PfcpXact *xact, HeartbeatRequest *request) {
     UTLT_Assert(status == STATUS_OK, return STATUS_ERROR,
                 "xact commit error");
 
-    UTLT_Info("[PFCP] Heartbeat Response");
+	UTLT_Debug("[PFCP] Heartbeat Response");
     return STATUS_OK;
 }
 
 Status UpfN4HandleHeartbeatResponse(PfcpXact *xact,
                                     HeartbeatResponse *response) {
     // if rsv response, nothing to do, else peer may be not alive
-    UTLT_Info("[PFCP] Heartbeat Response");
+	UTLT_Debug("[PFCP] Heartbeat Response");
     return STATUS_OK;
 }
