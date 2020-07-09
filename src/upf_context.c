@@ -432,6 +432,8 @@ UpfSession *UpfSessionFindBySeid(uint64_t seid) {
 
 UpfSession *UpfSessionAddByMessage(PfcpMessage *message) {
     UpfSession *session;
+	int pdr_idx=0;
+	uint8_t *network_instance=0;
 
     PFCPSessionEstablishmentRequest *request =
       &message->pFCPSessionEstablishmentRequest;
@@ -461,17 +463,23 @@ UpfSession *UpfSessionAddByMessage(PfcpMessage *message) {
         return NULL;
     }
     if (!request->createPDR[0].pDI.uEIPAddress.presence) {
-        UTLT_Error("UE IP Address error");
-        return NULL;
+		if (request->createPDR[1].pDI.uEIPAddress.presence) {
+				pdr_idx = 1;
+			}else{
+				UTLT_Error("UE IP Address error");
+				return NULL;
+			}
     }
     if (!request->createPDR[0].pDI.networkInstance.presence) {
-        UTLT_Error("Interface error");
-        return NULL;
+        UTLT_Error("Interface error not present, using 'default'");
+        network_instance = (uint8_t*)"default";
+    }else{
+		network_instance = request->createPDR[0].pDI.networkInstance.value;
     }
 
     session = UpfSessionAdd((PfcpUeIpAddr *)
-                &request->createPDR[0].pDI.uEIPAddress.value,
-                request->createPDR[0].pDI.networkInstance.value,
+                &request->createPDR[pdr_idx].pDI.uEIPAddress.value,
+                network_instance,
                 ((int8_t *)request->pDNType.value)[0]);
     UTLT_Assert(session, return NULL, "session add error");
 
