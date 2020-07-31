@@ -169,6 +169,8 @@ Status UpfN4BuildSessionReportRequestDownlinkDataReport(Bufblk **bufBlkPtr,
     */
 
     pfcpMessage.header.type = type;
+    pfcpMessage.header.seidP = 1;
+    pfcpMessage.header.seid = session->smfSeid;
     status = PfcpBuildMessage(bufBlkPtr, &pfcpMessage);
     UTLT_Assert(status == STATUS_OK, return STATUS_ERROR, "PFCP build error");
 
