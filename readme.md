@@ -27,7 +27,7 @@ git clone https://github.com/free5gc/path_util.git && \
 git clone https://github.com/free5gc/logger_util.git && \
 git clone https://github.com/free5gc/logger_conf.git
 
-cd /home/ubuntu/free5gs
+cd /home/ubuntu/free5gc
 git clone https://github.com/bjoern-r/upf.git
 mkdir build
 cd build
