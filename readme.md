@@ -1,5 +1,40 @@
 # free5GC-UPF
 
+## standalone build without free5gc
+```bash
+wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+sudo tar -C /usr/local -zxvf go1.12.9.linux-amd64.tar.gz
+mkdir free5gc
+cd free5gc
+mkdir go
+vi env.sh
+
+  export GOPATH=/home/ubuntu/free5gc/go
+  export GOROOT=/usr/local/go
+  export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+  export GO111MODULE=off
+
+. ./env.sh
+
+sudo apt-get -y update
+sudo apt-get -y install git gcc g++ cmake libmnl-dev autoconf libtool libyaml-dev pkg-config
+go get github.com/sirupsen/logrus
+
+mkdir -p ${GOPATH}/src/free5gc/lib
+
+cd ${GOPATH}/src/free5gc/lib
+git clone https://github.com/free5gc/path_util.git && \
+git clone https://github.com/free5gc/logger_util.git && \
+git clone https://github.com/free5gc/logger_conf.git
+
+cd /home/ubuntu/free5gs
+git clone https://github.com/bjoern-r/upf.git
+mkdir build
+cd build
+cmake ..
+make -j`nproc`
+```
+
 ## Get Started
 ### Prerequisites
 Libraries used in UPF
